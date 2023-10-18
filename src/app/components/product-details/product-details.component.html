@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <img style="max-width: 100%; max-height: 300px;" src="{{product?.img}}" alt="">
+    </div>
+    <div class="col-md-6">
+      <h1 class="text-danger">{{product?.name}}</h1>
+      <h5>{{product?.details}}</h5>
+      <h3 class="text-primary">Price: {{product?.price|currency}}</h3>
+    </div>
+  </div>
+  <button class="btn btn-warning m-3" (click)="back()">Back</button>
+  <div class="text-center m-3">
+    <button class="btn btn-secondary m-3" [disabled]="currentProductId==productsIdsList[0]" (click)="previous()">previous</button>
+    <button class="btn btn-secondary" [disabled]="currentProductId==productsIdsList[productsIdsList.length-1]" (click)="next()">next </button>
+  </div>
+</div>
+
+
+
+<!-- <div class="container">
+  <div class="row" *ngIf="product">
+    <div class="col-md-6">
+      <img [src]="product.img" alt="">
+    </div>
+    <div class="col-md-6">
+      <h3>{{product.name}}</h3>
+      <p>{{product.details}}</p>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+<input type="text" class="form-control" #inputValue>
+<button class="btn btn-primary" (click)="searchWithPrice(inputValue.value)">search</button>
+
+<div *ngFor="let product of productsAfterSearch">
+  <div>name: {{product.name}}</div>
+  <div>price: {{product.price}}</div>
+</div>
+
+
+
+<hr>
+
+<!-- <input type="text" class="form-control mt-5" #catValue placeholder="write category ID">
+<button class="btn btn-secondary" (click)="getProdsByCatId(catValue.value)">Get</button>
+
+<select>
+  <option value=""></option>
+  <option value=""></option>
+  <option value=""></option>
+  <option value=""></option>
+</select> -->
+
+<label>Select Category:</label>
+  <select id="categorySelect" [(ngModel)]="selectedCategoryId">
+    <option value="1">Table</option>
+    <option value="2">Chair</option>
+    <option value="3">Tv</option>
+    <option value="4">clothes</option>
+
+    <!-- Add more category options as needed -->
+  </select>
+  <button class="btn btn-warning" (click)="getProdsByCatId(selectedCategoryId)">Load Products</button>
+
+<div *ngFor="let product of prodsByCatId">
+  <div>name: {{product.name}}</div>
+  <div>price: {{product.price}}</div>
+</div>
+
+
+

@@ -1,0 +1,61 @@
+
+
+
+
+<!-- <button class="btn btn-primary" (click)="addUser()">Add user</button> -->
+
+
+
+
+<div class="container">
+  <h2>Sign Up</h2>
+  <form id="signup-form" (ngSubmit)="addUser()" #signUpForm="ngForm">
+      <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" name="first-name" required minlength="3"
+          [(ngModel)]="user.firstName"
+          #firstNameValue="ngModel"
+          [ngClass]="{'is-invalid':(firstNameValue.dirty||firstNameValue.touched)&&firstNameValue.invalid}">
+
+          <span class="invalid-feedback">
+              <span *ngIf="firstNameValue.errors?.['required']">first name is required</span>
+              <span *ngIf="firstNameValue.errors?.['minlength']">first name mustn't be less than 3 characters </span>
+          </span>
+      </div>
+      <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" name="last-name"
+            required
+            pattern="[A-Za-z]{5,}"
+           [(ngModel)]="user.lastName"
+          [ngClass]="{'is-invalid':(lastNameValue.dirty||lastNameValue.touched)&&lastNameValue.invalid}"
+          #lastNameValue="ngModel">
+          <span class="invalid-feedback">
+            <span *ngIf="lastNameValue.errors?.['required']">lastname is required</span>
+            <span *ngIf="lastNameValue.errors?.['pattern']">lastname mustn't be less than 5 characters </span>
+          </span>
+      </div>
+      <div class="form-group">
+          <label for="email">email</label>
+          <input type="email" id="email" name="email"
+          [(ngModel)]="user.email"
+          #emailValue="ngModel"
+          required
+          [ngClass]="{'is-invalid':(emailValue.dirty||emailValue.touched)&&emailValue.invalid}"
+          email>
+
+          <span class="invalid-feedback">
+            <span *ngIf="emailValue.errors?.['required']">email is required</span>
+            <span *ngIf="emailValue.errors?.['email']">email must contains @</span>
+          </span>
+      </div>
+      <button type="submit" class="btn-submit" [disabled]="signUpForm.invalid">Submit</button>
+  </form>
+</div>
+
+
+<!-- <h2>{{user|json}}</h2> -->
+
+<h3>{{firstNameValue.dirty|json}}</h3>
+<h3>{{firstNameValue.touched|json}}</h3>
+

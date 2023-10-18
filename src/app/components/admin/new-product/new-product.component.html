@@ -1,0 +1,121 @@
+<!-- <button class="btn btn-primary" (click)="addProduct()">Add product</button> -->
+
+<div class="container">
+  <h2>Add New Product</h2>
+  <form id="new-product-form" (ngSubmit)="addProduct()" #newProductForm="ngForm">
+    <div class="form-group">
+      <label for="product-name">Product Name</label>
+      <input
+        type="text"
+        id="product-name"
+        name="product-name"
+        required
+        minlength="3"
+        [(ngModel)]="product.name"
+        #productNameValue="ngModel"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': (productNameValue.dirty || productNameValue.touched) && productNameValue.invalid }"
+      />
+      <div class="invalid-feedback">
+        <span *ngIf="productNameValue.errors?.['required']">Product name is required</span>
+        <span *ngIf="productNameValue.errors?.['minlength']">Product name must be at least 3 characters</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="product-price">Price</label>
+      <input
+        type="number"
+        id="product-price"
+        name="product-price"
+        [(ngModel)]="product.price"
+        #productPriceValue="ngModel"
+        required
+        class="form-control"
+        [ngClass]="{ 'is-invalid': (productPriceValue.dirty || productPriceValue.touched) && productPriceValue.invalid }"
+      />
+      <div class="invalid-feedback">
+        <span *ngIf="productPriceValue.errors?.['required']">Price is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="product-quantity">Quantity</label>
+      <input
+        type="number"
+        id="product-quantity"
+        name="product-quantity"
+        [(ngModel)]="product.quantity"
+        #productQuantityValue="ngModel"
+        required
+        class="form-control"
+        [ngClass]="{ 'is-invalid': (productQuantityValue.dirty || productQuantityValue.touched) && productQuantityValue.invalid }"
+      />
+      <div class="invalid-feedback">
+        <span *ngIf="productQuantityValue.errors?.['required']">Quantity is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="product-categoryID">Category ID</label>
+      <input
+        type="number"
+        id="product-categoryID"
+        name="product-categoryID"
+        [(ngModel)]="product.categoryID"
+        #productCategoryIDValue="ngModel"
+        required
+        class="form-control"
+        [ngClass]="{ 'is-invalid': (productCategoryIDValue.dirty || productCategoryIDValue.touched) && productCategoryIDValue.invalid }"
+      />
+      <div class="invalid-feedback">
+        <span *ngIf="productCategoryIDValue.errors?.['required']">Category ID is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="product-Material">Material</label>
+      <input
+        type="text"
+        id="product-Material"
+        name="product-Material"
+        [(ngModel)]="product.Material"
+        #productMaterialValue="ngModel"
+        required
+        class="form-control"
+        [ngClass]="{ 'is-invalid': (productMaterialValue.dirty || productMaterialValue.touched) && productMaterialValue.invalid }"
+      />
+      <div class="invalid-feedback">
+        <span *ngIf="productMaterialValue.errors?.['required']">Material is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="product-img">Image URL</label>
+      <input
+        type="text"
+        id="product-img"
+        name="product-img"
+        [(ngModel)]="product.img"
+        #productImgValue="ngModel"
+        required
+        class="form-control"
+        [ngClass]="{ 'is-invalid': (productImgValue.dirty || productImgValue.touched) && productImgValue.invalid }"
+      />
+      <div class="invalid-feedback">
+        <span *ngIf="productImgValue.errors?.['required']">Image URL is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="product-details">Details</label>
+      <textarea
+        id="product-details"
+        name="product-details"
+        [(ngModel)]="product.details"
+        #productDetailsValue="ngModel"
+        required
+        class="form-control"
+        [ngClass]="{ 'is-invalid': (productDetailsValue.dirty || productDetailsValue.touched) && productDetailsValue.invalid }"
+      ></textarea>
+      <div class="invalid-feedback">
+        <span *ngIf="productDetailsValue.errors?.['required']">Details are required</span>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="newProductForm.invalid">Add Product</button>
+  </form>
+</div>

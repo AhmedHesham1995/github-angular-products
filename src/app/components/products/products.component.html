@@ -1,0 +1,68 @@
+<!-- Event binding -->
+<div class="container">
+  <!-- <button class="btn btn-primary" (click)="toggleImage()">
+    Show/Hide Image
+  </button> -->
+
+
+
+
+  <div class="row ">
+      <div class="col-sm-4 mb-4" *ngFor="let product of productsWithFiltered" >
+        <img [src]="product.img" class="img-fluid" >
+        <h4>{{product.name|uppercase}}</h4>
+        <h4>{{product.price|currency:'USD'}}</h4>
+        <!-- <div class="mb-2">quantity: {{product.quantity}}</div> -->
+      <button style="margin-right: 140px;" class="btn btn-danger" (click)="addToCart(product)"><i
+          class="fa-sharp fa-solid fa-cart-plus modifyIcon"></i>Add To Cart</button>
+      <button [routerLink]='["/productDetails",product.id]' class="btn btn-secondary "><i
+            class="fa-sharp fa-solid fa-cart-plus modifyIcon"></i>details</button>
+      <button class="btn btn-primary" (click)="deleteProduct(product.id)">Delete</button>
+  </div>
+</div>
+
+
+
+  <div class="container text-center">
+    <h1 class="mt-5">showing products by category</h1>
+    <select class="mb-5" name="category" id="cat" [(ngModel)]="cat">
+      <option value="0">All products</option>
+      <option value="1">table</option>
+      <option value="2">chair</option>
+      <option value="3">tv</option>
+      <option value="4">clothes</option>
+    </select>
+
+    <h5>{{ today | date:'short' }}</h5>
+
+    <div class="row">
+      <ng-container  *ngFor="let product of productsWithCat">
+        <div ProductCard [ngClass]="{'rounded-5':product.quantity>0}" [ngStyle]="{'background-color':(product.quantity>9)?'grey':'rgb(241 198 198)','color':(product.price>10000)?'red':'blue'}" class="col-sm-4 mb-4 m-1 p-2" style="width: 32%;" [style.background-color]="product.quantity==1?'yellow':'white'">
+          <img [src]="product.img" class="img-fluid" >
+          <h4>{{product.name|uppercase}}</h4>
+          <h4>{{product.price|currency:'USD'}}</h4>
+          <div *ngIf="product.quantity!==0">Quantity: {{product.quantity}}</div>
+          <div [ngSwitch]="product.quantity">
+            <div *ngSwitchCase="0">sorry this product is not available</div>
+            <div *ngSwitchCase="1">hurry up and catch the last one!</div>
+          </div>
+          <div>
+          <ng-container *ngIf="product.price>10000;else price">high price</ng-container>
+          <ng-template #price>normal price</ng-template>
+
+          </div>
+
+          <button [disabled]="product.quantity==0" (click)="quantityHandle(product)" class="btn btn-primary mt-2">buy</button>
+      </div>
+      </ng-container>
+
+
+  </div>
+</div>
+
+<div class="text-center">
+  <p>{{creditCard|credit}}</p>
+</div>
+
+<!-- <h2 class="text-center" *ngIf="flag">Thanks for buying</h2> -->
+

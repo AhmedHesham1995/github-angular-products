@@ -1,0 +1,46 @@
+<div class="container mt-5">
+  <h2>Bootstrap Form Example</h2>
+  <form [formGroup]="userForm">
+    <div class="mb-3">
+      <label for="fullName" class="form-label">Full Name</label>
+      <input type="text" class="form-control" id="fullName" placeholder="Enter your first name"
+      formControlName="fullName" name="fullName"
+      [ngClass]="{'is-invalid':(fullName?.dirty||fullName?.touched)&&fullName?.invalid}">
+
+      <span class="invalid-feedback">
+        <span *ngIf="fullName?.errors?.['required']">first name is required</span>
+        <span *ngIf="fullName?.errors?.['minlength']">first name mustn't be less than 3</span>
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter your email"
+      formControlName="email" name="email"
+      [ngClass]="{'is-invalid':(userForm.get('email')?.dirty||userForm.get('email')?.touched)&&userForm.get('email')?.invalid}">
+      <span class="invalid-feedback">
+        <span *ngIf="userForm.get('email')?.errors?.['required']">email is required</span>
+        <span *ngIf="userForm.get('email')?.errors?.['email']">email must contain @</span>
+      </span>
+    </div>
+
+    <div class="mb-3">
+      <label for="mobile" class="form-label">Phone</label>
+      <input type="text" class="form-control" id="mobile" placeholder="Enter your last name"
+      formControlName="mobile" name="mobile"
+      [ngClass]="{'is-invalid':(userForm.get('mobile')?.dirty||userForm.get('mobile')?.touched)&&userForm.get('mobile')?.invalid}">
+      <span class="invalid-feedback">
+        <span *ngIf="userForm.get('mobile')?.errors?.['required']">phone number is required</span>
+        <span *ngIf="userForm.get('mobile')?.errors?.['pattern']">phone must be a numberand be 11</span>
+      </span>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Submit</button>
+    <h2 style="color: red;">{{userForm.value|json}}</h2>
+
+  </form>
+</div>
+
+
+
+
